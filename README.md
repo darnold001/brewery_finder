@@ -15,3 +15,8 @@ Enjoy your selected brewery information
    website
    address
    tags
+
+Model
+    ______            __________________               _________
+   | User |>---------| Favorite Brewery |------------<| Brewery |
+    ‾‾‾‾‾‾            ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾               ‾‾‾‾‾‾‾‾‾

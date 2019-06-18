@@ -1,4 +1,5 @@
 
+
 class Brewery
 
     def self.cities(city)
@@ -6,4 +7,8 @@ class Brewery
        @parsehash = JSON.parse(response_string)
        puts @parsehash
     end
+
+class Brewery < ActiveRecord::Base
+    has_many :favorite_breweries
+    has_many :users, through: :favorite_breweries
 end
