@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2019_06_18_180401) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "location"
   end
 
 end
