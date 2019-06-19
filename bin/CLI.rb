@@ -20,4 +20,17 @@ class CLI
         Brewery.brewery_return
     end
 
-end
+    def self.add_favorite
+        puts "Would you like to save one of these breweries to your profile? (yes/no)"
+        yn_response = gets.chomp
+        if yn_response == "yes"
+            puts "Please enter the name of the brewery that you would like to save:"
+            @brewery_fav = gets.chomp
+            Brewery.create user: @user_name, brewery: @brewery_fav
+        elsif yn_response = "no"
+            Brewery.brewery_info
+        else puts "I am sorry, that is not a valid entry. Please enter either yes or no"
+        end
+    end
+
+endgi 
