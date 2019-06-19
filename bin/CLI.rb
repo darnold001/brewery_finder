@@ -26,7 +26,7 @@ class CLI
         if yn_response == "yes"
             puts "Please enter the name of the brewery that you would like to save:"
             @brewery_fav = gets.chomp
-            Brewery.create user: @user_name, brewery: @brewery_fav
+            Brewery.create name: @brewery_fav
         elsif yn_response = "no"
             Brewery.brewery_info
         else puts "I am sorry, that is not a valid entry. Please enter either yes or no"
