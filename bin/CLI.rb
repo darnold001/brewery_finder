@@ -1,8 +1,8 @@
-require "sinatra/activerecord"
+# require "sinatra/activerecord"
 
-class Main_Menu
+class CLI
     def self.welcome
-        puts "Welcome to  our BFF app - Brewery Favorite Finder!"
+        puts "Welcome to our BFF app - Brewery Favorite Finder!"
         puts "What is your name?"
         @user_name = gets.chomp
         puts "What city are you drinking in?"
@@ -11,7 +11,13 @@ class Main_Menu
     end
 
     def self.add_user
-        User.create(:name => @user_name.downcase, :locations => @user_loc.downcase)
+         User.create name: @user_name, location: @user_loc
+    end
+
+    def self.brewery_finder
+        puts "Hello #{@user_name},"
+        Brewery.list(@user_loc)
+        Brewery.brewery_return
     end
 
 end
