@@ -186,11 +186,14 @@ class CLI
     def self.name_query (name)
         jquery = RestClient.get "https://api.openbrewerydb.org/breweries?by_name=#{name}"
         json = JSON.parse(jquery)
-        info = json[0].each_with_object ({}) do |(k,v), hash|
+        if json == []   
+            puts "I am sorry, there are no breweries that match that name; please ensure that the name is spelled correctly."
+        else info = json[0].each_with_object ({}) do |(k,v), hash|
              hash[k] = v unless k == "id" || k == "longitude" || k == "latitude" || k == "tag_list"
-        end
-        info.each {|k,v| puts "#{k}: #{v}"}
+            end
+            info.each {|k,v| puts "#{k}: #{v}"}
         add_lines
+        end
     end
 
     def self.user_get_name
