@@ -6,7 +6,9 @@ Project by [@darnold001](https://github.com/darnold001) and [@rjortega](https://
 
 Thanks for checking it out!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0mROs3x2Xoc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href=“http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+” target=“_blank”><img src=“https://www.youtube.com/embed/0mROs3x2Xoc”
+alt=“IMAGE ALT TEXT HERE” width=“240” height=“180" border=“10” /></a>
 
 ## Installation
    1. Clone our repo into the directory where you want the app
