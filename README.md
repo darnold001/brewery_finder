@@ -6,8 +6,7 @@ Project by [@darnold001](https://github.com/darnold001) and [@rjortega](https://
 
 Thanks for checking it out!
 
-<a href=“http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-” target=“_blank”><img src=“https://www.youtube.com/embed/0mROs3x2Xoc”
+<a href=“https://www.youtube.com/embed/0mROs3x2Xoc” target=“_blank”><img src=“http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg”
 alt=“IMAGE ALT TEXT HERE” width=“240” height=“180" border=“10” /></a>
 
 ## Installation
