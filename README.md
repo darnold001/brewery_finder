@@ -17,11 +17,15 @@ Thanks for checking it out!
 
 ### Welcome Menu
    * Create user or hit database for existing user
+
+
    ![Welcome Menu](./assets/welcome_menu.png)
 
 ### User Menu
    * Access to Favorites menu
    * Ability to look up brewery by city or name
+
+
    ![User Menu](./assets/user_menu.png)
 
 ### Favorite menu
@@ -31,6 +35,8 @@ Thanks for checking it out!
    * Allows you to delete ALL breweries from both:
       * the database linked to the user
       * the associated brewery table
+
+
    ![Favorites Menu](./assets/favorites_menu.png)
 
 ### API Brewery Query
@@ -38,6 +44,8 @@ Thanks for checking it out!
       * City
       * Name of brewery
    * After query user is prompted with the choice to save to favorites list
+
+
    ![Brewery Query](./assets/API_brewery_query.png)
    ![Add To Favorites Prompt](./assets/add_to_favorites.png)
 
@@ -58,6 +66,6 @@ Thanks for checking it out!
 
 #### Credits
    * API : thanks to Open Brewery DB for giving open access to their api
-      *created and maintained by Chris J Mears and Wandering Leaf Studios LLC.
-      *[link to API!](https://www.openbrewerydb.org)
+      * created and maintained by Chris J Mears and Wandering Leaf Studios LLC.
+      * [link to API!](https://www.openbrewerydb.org)
    * Thanks to Flatiron Schools for guided support 
