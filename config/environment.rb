@@ -9,4 +9,6 @@ require_all "bin"
 
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: "db/development.db")
 
-CLI.menu
+ActiveRecord::Base.logger = nil
+
+CLI.welcome_menu
