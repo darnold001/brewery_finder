@@ -1,13 +1,13 @@
 class CLI
 
-    
     def self.welcome_menu
         Asci.art
+        add_lines
         puts "Welcome to our BFF app - Brewery Favorite Finder!"
-        puts "Press 1 if you're a new user"
-        puts "Press 2 if you're an existing user"
-        puts "Press 3 to exit app"
-        puts "-------------------------------------------------------------------------"
+        puts "Enter 1 if you're a new user"
+        puts "Enter 2 if you're an existing user"
+        puts "Enter 3 to exit app"
+        add_lines
         options
     end
     
@@ -18,16 +18,20 @@ class CLI
             # new user
             user_get_name
             user_add
+            add_lines
             user_menu
+            goodbye
         when "2"
             # returning user
             puts "Welcome back! Please enter your name"
-            puts "-------------------------------------------------------------------------"
+            add_lines
             @user_name = gets.chomp.downcase
             @user_name = User.find_by name: @user_name
             puts "Hello #{@user_name.name.capitalize}!"
             user_menu
+            goodbye
         when "3"
+            Asci.goodbye
             goodbye
         else
             # invalid input
@@ -37,12 +41,14 @@ class CLI
     end
     
     def self.user_menu
+        Asci.menu
+        add_lines
         puts "User Menu"
-        puts "Select 1 for Favorites Menu"
+        puts "Select 1 for favorites Menu"
         puts "Select 2 to search for a list of breweries in a city"
         puts "Select 3 to search for a brewery by name"
         puts "Select 4 to Exit"
-        puts "-------------------------------------------------------------------------"
+        add_lines
         user_menu_input = gets.chomp
         case user_menu_input
         when "1"
@@ -61,24 +67,29 @@ class CLI
     end
     
     def self.favorite_menu
+        add_lines
+        puts Asci.favorite
         puts "Favorite Menu"
+        add_lines
         puts "Here is a list of your favorite breweries:"
-        puts "-------------------------------------------------------------------------"
+        add_lines
         puts @user_name.breweries.pluck :name
-        puts "-------------------------------------------------------------------------"
+        add_lines
         puts "Options:"
-        puts "1 to get more info on a brewery"
-        puts "2 delete a brewery from your list"
-        puts "3 delete entire brewery list"
-        puts "4 to exit"
-        puts "-------------------------------------------------------------------------"
+        puts "Enter 1 to get more info on a brewery"
+        puts "Enter 2 delete a brewery from your list"
+        puts "Enter 3 delete entire brewery list"
+        puts "Enter 4 to go back to Main menu"
+        puts "Enter 5 to exit"
+        add_lines
         favorite_input = gets.chomp
         case favorite_input
         when "1"
             select_for_info
+            favorite_menu
         when "2"
             puts "please enter the name of the brewery you would like to delete:"
-            puts "-------------------------------------------------------------------------"
+            add_lines
             delete_input = gets.chomp
             to_delete = Brewery.find_by name: delete_input
             FavoriteBrewery.find_by(brewery_id: to_delete.id).destroy
@@ -92,8 +103,10 @@ class CLI
             brewery_ids.delete_all
             breweries_to_delete.flatten.each {|id| (Brewery.find id).delete}
             puts "-------------------Favorites List Destroyed --------------------------"
-            favorite_menu
-        when "4" 
+            user_menu
+        when "4"
+            user_menu
+        when "5" 
             goodbye
         else
             puts "Invalid input"
@@ -102,19 +115,21 @@ class CLI
     end
 
     def self.goodbye
+        add_lines
+        puts Asci.goodbye
         puts "Thanks for using BFF app"
         puts "Cheers"
+        add_lines
         exit!
     end
 
     def self.select_for_info
         puts "Please enter the name of a brewery that you would like to learn more about:"
-        puts "or enter 'main' to return to main menu"
-        puts "-------------------------------------------------------------------------"
+        puts "Or enter '1' for Main menu"
+        add_lines
         @brewery_info = gets.chomp
-        user_menu if @brewery_info == "main"
-        @requested_brewery_info = name_query (@brewery_info)
-        puts @requested_brewery_info
+        add_lines
+        @brewery_info == "1" ? user_menu : (puts name_query(@brewery_info))
     end
     
     def self.brewery_add
@@ -138,28 +153,31 @@ class CLI
         @breweries = []
         @parsehash.each {|key, value| @breweries << key["name"]}
         if @breweries.count == 0
-            puts "-------------------------------------------------------------------------"
+            add_lines
             puts "Sorry, no breweries in your area."
-            puts "-------------------------------------------------------------------------"
+            add_lines
             get_city
         elsif @breweries.count == 1
-            puts "-------------------------------------------------------------------------"
+            add_lines
             puts "You have one brewery in your area:"
+            add_lines
             puts name_query(@breweries[0])
-            puts "-------------------------------------------------------------------------"
+            add_lines
             Favorite.add_prompt
         elsif @breweries.count == 50
-            puts "-------------------------------------------------------------------------"
+            add_lines
             puts "Wow, there are 50 or more breweries in your city:"
+            add_lines
             puts @breweries
-            puts "-------------------------------------------------------------------------"
+            add_lines
             select_for_info
             Favorite.add_prompt
         else
-            puts "-------------------------------------------------------------------------"
+            add_lines
             puts "You have #{@breweries.count} breweries to choose from:"
+            add_lines
             puts @breweries
-            puts "-------------------------------------------------------------------------"
+            add_lines
             select_for_info
             Favorite.add_prompt
         end
@@ -172,8 +190,7 @@ class CLI
              hash[k] = v unless k == "id" || k == "longitude" || k == "latitude" || k == "tag_list"
         end
         info.each {|k,v| puts "#{k}: #{v}"}
-        puts "-------------------------------------------------------------------------"
-        user_menu
+        add_lines
     end
 
     def self.user_get_name
@@ -183,5 +200,9 @@ class CLI
     
     def self.user_add
         @user_name = User.create name: @user_name
+    end
+
+    def self.add_lines
+        puts "----------------------------------------------------------------------------"
     end
 end
