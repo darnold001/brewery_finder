@@ -2,11 +2,12 @@ class CLI
 
     
     def self.welcome_menu
-        binding.pry
+        Asci.art
         puts "Welcome to our BFF app - Brewery Favorite Finder!"
         puts "Press 1 if you're a new user"
         puts "Press 2 if you're an existing user"
         puts "Press 3 to exit app"
+        puts "-------------------------------------------------------------------------"
         options
     end
     
@@ -21,6 +22,7 @@ class CLI
         when "2"
             # returning user
             puts "Welcome back! Please enter your name"
+            puts "-------------------------------------------------------------------------"
             @user_name = gets.chomp.downcase
             @user_name = User.find_by name: @user_name
             puts "Hello #{@user_name.name.capitalize}!"
@@ -40,6 +42,7 @@ class CLI
         puts "Select 2 to search for a list of breweries in a city"
         puts "Select 3 to search for a brewery by name"
         puts "Select 4 to Exit"
+        puts "-------------------------------------------------------------------------"
         user_menu_input = gets.chomp
         case user_menu_input
         when "1"
@@ -60,23 +63,27 @@ class CLI
     def self.favorite_menu
         puts "Favorite Menu"
         puts "Here is a list of your favorite breweries:"
+        puts "-------------------------------------------------------------------------"
         puts @user_name.breweries.pluck :name
+        puts "-------------------------------------------------------------------------"
         puts "Options:"
         puts "1 to get more info on a brewery"
         puts "2 delete a brewery from your list"
         puts "3 delete entire brewery list"
         puts "4 to exit"
+        puts "-------------------------------------------------------------------------"
         favorite_input = gets.chomp
         case favorite_input
         when "1"
             select_for_info
         when "2"
             puts "please enter the name of the brewery you would like to delete:"
+            puts "-------------------------------------------------------------------------"
             delete_input = gets.chomp
             to_delete = Brewery.find_by name: delete_input
             FavoriteBrewery.find_by(brewery_id: to_delete.id).destroy
             to_delete.destroy
-            puts "Brewery Deleted"
+            puts "--------------------------Brewery Deleted------------------------------------"
             favorite_menu
         when "3"
             breweries_to_delete = []
@@ -84,12 +91,12 @@ class CLI
             breweries_to_delete << @user_name.breweries.pluck(:id)
             brewery_ids.delete_all
             breweries_to_delete.flatten.each {|id| (Brewery.find id).delete}
-            puts "Favorites List Destroyed"
+            puts "-------------------Favorites List Destroyed --------------------------"
             favorite_menu
         when "4" 
             goodbye
         else
-            puts "Invalid imput"
+            puts "Invalid input"
             favorite_menu
         end
     end
@@ -103,6 +110,7 @@ class CLI
     def self.select_for_info
         puts "Please enter the name of a brewery that you would like to learn more about:"
         puts "or enter 'main' to return to main menu"
+        puts "-------------------------------------------------------------------------"
         @brewery_info = gets.chomp
         user_menu if @brewery_info == "main"
         @requested_brewery_info = name_query (@brewery_info)
@@ -130,20 +138,28 @@ class CLI
         @breweries = []
         @parsehash.each {|key, value| @breweries << key["name"]}
         if @breweries.count == 0
+            puts "-------------------------------------------------------------------------"
             puts "Sorry, no breweries in your area."
+            puts "-------------------------------------------------------------------------"
             get_city
         elsif @breweries.count == 1
+            puts "-------------------------------------------------------------------------"
             puts "You have one brewery in your area:"
             puts name_query(@breweries[0])
+            puts "-------------------------------------------------------------------------"
             Favorite.add_prompt
         elsif @breweries.count == 50
+            puts "-------------------------------------------------------------------------"
             puts "Wow, there are 50 or more breweries in your city:"
             puts @breweries
+            puts "-------------------------------------------------------------------------"
             select_for_info
             Favorite.add_prompt
         else
+            puts "-------------------------------------------------------------------------"
             puts "You have #{@breweries.count} breweries to choose from:"
             puts @breweries
+            puts "-------------------------------------------------------------------------"
             select_for_info
             Favorite.add_prompt
         end
@@ -153,9 +169,10 @@ class CLI
         jquery = RestClient.get "https://api.openbrewerydb.org/breweries?by_name=#{name}"
         json = JSON.parse(jquery)
         info = json[0].each_with_object ({}) do |(k,v), hash|
-             hash[k] = v unless k == "id" || k == "longitute" || k == "latitude" || k == "tag_list"
+             hash[k] = v unless k == "id" || k == "longitude" || k == "latitude" || k == "tag_list"
         end
         info.each {|k,v| puts "#{k}: #{v}"}
+        puts "-------------------------------------------------------------------------"
     end
 
     def self.user_get_name
