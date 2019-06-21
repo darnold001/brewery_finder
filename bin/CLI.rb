@@ -173,6 +173,7 @@ class CLI
         end
         info.each {|k,v| puts "#{k}: #{v}"}
         puts "-------------------------------------------------------------------------"
+        user_menu
     end
 
     def self.user_get_name
