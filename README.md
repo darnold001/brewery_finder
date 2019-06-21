@@ -2,8 +2,11 @@
 
 ## App for finding breweries based on location and user criteria
 
-Project by @darnold001 and @rjortega
+Project by [@darnold001](https://github.com/darnold001) and [@rjortega](https://github.com/rjortega)
+
 Thanks for checking it out!
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0mROs3x2Xoc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Installation
    1. Clone our repo into the directory where you want the app
