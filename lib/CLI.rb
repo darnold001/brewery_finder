@@ -162,14 +162,12 @@ class CLI
             puts "You have one brewery in your area:"
             add_lines
             puts name_query(@breweries[0])
-            add_lines
             Favorite.add_prompt
         elsif @breweries.count == 50
             add_lines
             puts "Wow, there are 50 or more breweries in your city:"
             add_lines
             puts @breweries
-            add_lines
             select_for_info
             Favorite.add_prompt
         else
@@ -177,7 +175,6 @@ class CLI
             puts "You have #{@breweries.count} breweries to choose from:"
             add_lines
             puts @breweries
-            add_lines
             select_for_info
             Favorite.add_prompt
         end
