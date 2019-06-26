@@ -10,4 +10,6 @@ ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: "db/develo
 
 ActiveRecord::Base.logger = nil
 
+api = BreweryAPI.new("https://api.openbrewerydb.org/breweries")
+cli = CLI.new(api)
 CLI.welcome_menu
