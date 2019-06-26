@@ -1,4 +1,8 @@
 class CLI
+  def initialize(breweryAPI)
+    @@breweryAPI = breweryAPI
+  end
+
   def self.welcome_menu
     Asci.art
     Prompt.initial_menu
@@ -90,7 +94,8 @@ class CLI
   end
 
   def self.list(user_loc)
-    city_reponse = RestClient.get "https://api.openbrewerydb.org/breweries?by_city=#{user_loc}&per_page=50 "
+    puts @@breweryAPI
+    city_reponse = @@breweryAPI.get_by_location(user_loc)
     @parsehash = JSON.parse(city_reponse)
   end
 
